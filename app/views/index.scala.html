@@ -63,13 +63,14 @@
                 $send.prop("disabled", true);
 
                 var send = function () {
-                    var text = { 
+                    var incomming = { 
                       message:  $message.val(),
                       username: $username.val(),
                     }
+                    let text = `${incomming.username} `+` ${incomming.message}`
                     console.log(text)
+                    // $username.val("");
                     $message.val("");
-                    $username.val("");
                     connection.send(text);
                 };
 
@@ -88,8 +89,11 @@
                     console.log('WebSocket Error ', error);
                 };
                 connection.onmessage = function (event) {
-                    $messages.append($("<li style='font-size: 1.0em'>" + event + event + "</li>"))
-                    console.log('event -->',event)
+                    let data = event.data.split(' ')
+
+                    $messages.append($("<li style='font-size: 1.0em'>" + " Username:  " + data[0] + "<br>"
+                     + "Message:  " + data[2] + "</li>"))
+                    console.log('event -->',event, 'data--->', data)
                 }
         </script>
     </body>
