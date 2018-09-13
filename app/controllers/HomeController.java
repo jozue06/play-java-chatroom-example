@@ -48,7 +48,7 @@ public class HomeController extends Controller {
         this.webJarsUtil = webJarsUtil;
     }
 
-    public Result index() {
+    public Result indexs() {
         Http.Request request = request();
         String url = routes.HomeController.chat().webSocketURL(request);
         return Results.ok(views.html.index.render(url, webJarsUtil));
@@ -56,6 +56,7 @@ public class HomeController extends Controller {
 
     public WebSocket chat() {
         return WebSocket.Text.acceptOrResult(request -> {
+            System.out.println(request);
             if (sameOriginCheck(request)) {
                 return CompletableFuture.completedFuture(F.Either.Right(userFlow));
             } else {
