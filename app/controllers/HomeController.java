@@ -56,7 +56,7 @@ public class HomeController extends Controller {
 
     public WebSocket chat() {
         return WebSocket.Text.acceptOrResult(request -> {
-            System.out.println(request);
+            // System.out.println(request);
             if (sameOriginCheck(request)) {
                 return CompletableFuture.completedFuture(F.Either.Right(userFlow));
             } else {
